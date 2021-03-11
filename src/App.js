@@ -1,9 +1,15 @@
 import { useState } from "react"
+import { h3SetToMultiPolygon } from "h3-js"
+
 import Map from "./Map"
+import { getGeoJson } from "./Map/utility"
 
 const App = () => {
   const [h3Indices, setH3Indices] = useState(new Set())
-  console.log("h3Indices", h3Indices)
+
+  const coordinates = h3SetToMultiPolygon(Array.from(h3Indices), true)
+  const geoJson = getGeoJson(coordinates)
+  console.log("geojson", geoJson)
 
   return (
     <div className="App">

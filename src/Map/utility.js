@@ -39,3 +39,27 @@ export function getH3IndicesForBB(
 
   return hexes
 }
+
+/**
+ *
+ * @param {*} multipolygon
+ * @returns
+ */
+
+export function getGeoJson(multipolygon) {
+  const geoJsonFormat = {
+    type: "FeatureCollection",
+    features: [
+      {
+        type: "Feature",
+        properties: {},
+        geometry: {
+          type: "MultiPolygon",
+          coordinates: multipolygon,
+        },
+      },
+    ],
+  }
+
+  return JSON.stringify(geoJsonFormat)
+}

@@ -57,7 +57,7 @@ const Map = ({ selectedH3Indices, onHexClick }) => {
         }
 
         // Set is a mutable data structure so it won't trigger a state update
-        // so you have to create a new one
+        // so you have to create a new one - https://stackoverflow.com/questions/58806883/how-to-use-set-with-reacts-usestate
         onHexClick(new Set(selectedH3Indices))
       },
     }),
