@@ -2,7 +2,7 @@ import DeckGL from "@deck.gl/react"
 import ReactMapGL from "react-map-gl"
 import { H3HexagonLayer } from "@deck.gl/geo-layers"
 import { useState } from "react"
-import { array } from "prop-types"
+import { object } from "prop-types"
 
 import { bboxFromViewport, getH3IndicesForBB } from "./utility"
 
@@ -40,15 +40,25 @@ const Map = ({ selectedH3Indices, onHexClick }) => {
       autoHighlight: true,
       getLineColor: [0, 0, 0],
       getFillColor: (d) => {
-        const isSelected = selectedH3Indices.includes(d)
+        const isSelected = selectedH3Indices.has(d)
+
         // rgba - rgb=0, but a=1 to make the hex clickable
         return isSelected ? [242, 141, 59, 50] : [0, 0, 0, 1]
       },
       opacity: 1,
-      onHover: (info) => console.log("hover", info),
+      //   onHover: (info) => console.log("hover", info),
       onClick: (info) => {
-        const updatedH3Indicies = [...selectedH3Indices, info.object]
-        onHexClick(updatedH3Indicies)
+        const isAlreadySelected = selectedH3Indices.has(info.object)
+
+        if (isAlreadySelected) {
+          selectedH3Indices.delete(info.object)
+        } else {
+          selectedH3Indices.add(info.object)
+        }
+
+        // Set is a mutable data structure so it won't trigger a state update
+        // so you have to create a new one
+        onHexClick(new Set(selectedH3Indices))
       },
     }),
   ]
@@ -69,7 +79,7 @@ const Map = ({ selectedH3Indices, onHexClick }) => {
 }
 
 Map.propTypes = {
-  selectedH3Indices: array,
+  selectedH3Indices: object,
 }
 
 export default Map
