@@ -37,9 +37,15 @@ const Map = ({ selectedH3Indices, onHexClick }) => {
       extruded: true,
       elevationScale: 0,
       getHexagon: (d) => d,
+      autoHighlight: true,
       getLineColor: [0, 0, 0],
-      getFillColor: [0, 0, 0, 1], // rgba - rgb=0, but a=1 to make the hex clickable
+      getFillColor: (d) => {
+        const isSelected = selectedH3Indices.includes(d)
+        // rgba - rgb=0, but a=1 to make the hex clickable
+        return isSelected ? [242, 141, 59, 50] : [0, 0, 0, 1]
+      },
       opacity: 1,
+      onHover: (info) => console.log("hover", info),
       onClick: (info) => {
         const updatedH3Indicies = [...selectedH3Indices, info.object]
         onHexClick(updatedH3Indicies)

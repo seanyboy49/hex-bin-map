@@ -7,6 +7,7 @@ const App = () => {
   return (
     <div className="App">
       <Map onHexClick={setH3Indices} selectedH3Indices={h3Indices} />
+
       <code>{h3Indices.join(",")}</code>
     </div>
   )
