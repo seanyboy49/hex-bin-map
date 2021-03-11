@@ -49,19 +49,17 @@ const GeoJSONInput = ({ onSubmit }) => {
 
   function handleLoadFromJSON(e) {
     e.preventDefault()
-    try {
-      const replaced = geoJSONInput.replace(/\r?\n|\r/g, "")
-      console.log("replaced", replaced)
-      const sanitized = JSON.parse(replaced)
-      console.log("sanitized", sanitized)
-    } catch (e) {
-      console.log("e", e)
-    }
 
-    // const h3Indices = featureToH3Set(sanitized, 12)
-    // const h3IndicesSet = new Set(h3Indices)
+    const validJSON = geoJSONInput.replace(/(\w+:)|(\w+ :)/g, function (s) {
+      return '"' + s.substring(0, s.length - 1) + '":'
+    })
 
-    // onSubmit(h3IndicesSet)
+    const pojo = JSON.parse(validJSON)
+
+    const h3Indices = featureToH3Set(pojo, 12)
+    const h3IndicesSet = new Set(h3Indices)
+
+    onSubmit(h3IndicesSet)
   }
 
   return (
