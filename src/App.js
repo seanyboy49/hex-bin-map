@@ -1,6 +1,7 @@
 import { useState } from "react"
 import { h3SetToMultiPolygon } from "h3-js"
 import { featureToH3Set } from "geojson2h3"
+import { Label, Input, Row, Col, Container, FormGroup, Form } from "reactstrap"
 
 import Map from "./Map"
 import { getGeoJson } from "./Map/utility"
@@ -60,7 +61,24 @@ const App = () => {
       <Map onHexClick={setH3Indices} selectedH3Indices={h3Indices} />
 
       {/* <code>{Array.from(h3Indices).join(",")}</code> */}
-      <textarea rows="4" cols="20"></textarea>
+      <Row>
+        <Col>
+          <Form>
+            <FormGroup>
+              <Label for="geojson-input">Paste GeoJSON</Label>
+              <Input id="geojson-input" type="textarea" rows="4" cols="20" />
+            </FormGroup>
+          </Form>
+        </Col>
+        <Col>
+          <Form>
+            <FormGroup>
+              <Label for="geojson-input">Paste GeoJSON</Label>
+              <Input id="geojson-input" type="textarea" rows="4" cols="20" />
+            </FormGroup>
+          </Form>
+        </Col>
+      </Row>
     </div>
   )
 }
