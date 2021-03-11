@@ -1,9 +1,13 @@
+import { useState } from "react"
 import Map from "./Map"
 
 const App = () => {
+  const [h3Indices, setH3Indices] = useState([])
+
   return (
     <div className="App">
-      <Map />
+      <Map onHexClick={setH3Indices} selectedH3Indices={h3Indices} />
+      <code>{h3Indices.join(",")}</code>
     </div>
   )
 }

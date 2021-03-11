@@ -2,6 +2,7 @@ import DeckGL from "@deck.gl/react"
 import ReactMapGL from "react-map-gl"
 import { H3HexagonLayer } from "@deck.gl/geo-layers"
 import { useState } from "react"
+import { array } from "prop-types"
 
 import { bboxFromViewport, getH3IndicesForBB } from "./utility"
 
@@ -20,7 +21,7 @@ const INITIAL_VIEW_STATE = {
   width: WIDTH,
 }
 
-const Map = () => {
+const Map = ({ selectedH3Indices, onHexClick }) => {
   const [viewState, setViewState] = useState(INITIAL_VIEW_STATE)
 
   const boundingBox = bboxFromViewport(viewState)
@@ -39,12 +40,16 @@ const Map = () => {
       getLineColor: [0, 0, 0],
       getFillColor: [0, 0, 0, 1], // rgba - rgb=0, but a=1 to make the hex clickable
       opacity: 1,
-      onClick: (info) => console.log("info", info),
+      onClick: (info) => {
+        const updatedH3Indicies = [...selectedH3Indices, info.object]
+        onHexClick(updatedH3Indicies)
+      },
     }),
   ]
 
   return (
     <DeckGL
+      style={{ position: "relative" }}
       height={HEIGHT}
       width={WIDTH}
       initialViewState={viewState}
@@ -55,6 +60,10 @@ const Map = () => {
       <ReactMapGL mapboxApiAccessToken={TOKEN} />
     </DeckGL>
   )
+}
+
+Map.propTypes = {
+  selectedH3Indices: array,
 }
 
 export default Map
