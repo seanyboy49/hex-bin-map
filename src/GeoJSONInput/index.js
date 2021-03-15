@@ -63,7 +63,7 @@ const GeoJSONInput = ({ onSubmit }) => {
   }
 
   return (
-    <Form onSubmit={handleLoadFromJSON}>
+    <Form className="w-100" onSubmit={handleLoadFromJSON}>
       <FormGroup>
         <Label for="geojson-input">Add GeoJSON</Label>
         <Input
@@ -73,7 +73,7 @@ const GeoJSONInput = ({ onSubmit }) => {
           id="geojson-input"
           type="textarea"
           rows="9"
-          cols="15"
+          cols="5"
         />
       </FormGroup>
       <Button disabled={!geoJSONInput} color="primary">

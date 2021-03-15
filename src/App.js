@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { h3SetToMultiPolygon } from "h3-js"
 
-import { Row, Col } from "reactstrap"
+import { Row, Col, Container } from "reactstrap"
 
 import Map from "./Map"
 import { getGeoJson } from "./Map/utility"
@@ -25,15 +25,17 @@ const App = () => {
             <GeoJSONInput onSubmit={setH3Indices} />
           </Row>
 
-          <Row>
+          <Row className="m-2 d-flex flex-column">
             <h3>H3 Indices</h3>
+
             <div>
               <code>{Array.from(h3Indices).join(",")}</code>
             </div>
           </Row>
 
-          <Row>
+          <Row className="m-2 d-flex flex-column">
             <h3>GeoJSON</h3>
+
             <div>
               <code>{geoJson}</code>
             </div>
