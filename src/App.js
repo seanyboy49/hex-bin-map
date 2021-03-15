@@ -13,8 +13,6 @@ const App = () => {
   const coordinates = h3SetToMultiPolygon(Array.from(h3Indices), true)
   const geoJson = getGeoJson(coordinates)
 
-  // const hexes = featureToH3Set(sample, 12)
-
   return (
     <div className="App">
       <Row>
@@ -22,16 +20,26 @@ const App = () => {
           <Map onHexClick={setH3Indices} selectedH3Indices={h3Indices} />
         </Col>
 
-        <Col>
+        <Col className="m-2">
           <Row>
-            <Col>
-              <GeoJSONInput onSubmit={setH3Indices} />
-            </Col>
+            <GeoJSONInput onSubmit={setH3Indices} />
+          </Row>
+
+          <Row>
+            <h3>H3 Indices</h3>
+            <div>
+              <code>{Array.from(h3Indices).join(",")}</code>
+            </div>
+          </Row>
+
+          <Row>
+            <h3>GeoJSON</h3>
+            <div>
+              <code>{geoJson}</code>
+            </div>
           </Row>
         </Col>
       </Row>
-
-      {/* <code>{Array.from(h3Indices).join(",")}</code> */}
     </div>
   )
 }

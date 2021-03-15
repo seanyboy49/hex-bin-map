@@ -73,7 +73,7 @@ const GeoJSONInput = ({ onSubmit }) => {
           id="geojson-input"
           type="textarea"
           rows="9"
-          cols="5"
+          cols="15"
         />
       </FormGroup>
       <Button disabled={!geoJSONInput} color="primary">

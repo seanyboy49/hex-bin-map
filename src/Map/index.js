@@ -6,8 +6,7 @@ import { object } from "prop-types"
 
 import { bboxFromViewport, getH3IndicesForBB } from "./utility"
 
-const TOKEN =
-  "pk.eyJ1Ijoic2VhbmJvcmFtbGVlIiwiYSI6ImNrbTJlcnFqejE3NGQydXFtZng1cXR4eGgifQ.oZ0mZBtUX5u72QTPtPITfA"
+const token = process.env.REACT_APP_MAPBOX_TOKEN
 
 const HEIGHT = 457
 const WIDTH = 620
@@ -73,7 +72,7 @@ const Map = ({ selectedH3Indices, onHexClick }) => {
       controller={true}
       layers={layers}
     >
-      <ReactMapGL mapboxApiAccessToken={TOKEN} />
+      <ReactMapGL mapboxApiAccessToken={token} />
     </DeckGL>
   )
 }
